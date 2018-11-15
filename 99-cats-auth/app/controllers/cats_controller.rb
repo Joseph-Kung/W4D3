@@ -8,6 +8,9 @@ class CatsController < ApplicationController
 
   def show
     @cat = Cat.find(params[:id])
+    if user_verify?
+      @owner = true
+    end
     render :show
   end
 
@@ -29,16 +32,27 @@ class CatsController < ApplicationController
   
   def user_verify
     # byebug
-    
     if current_user
       current_user.cats.each do |cat|
         #byebug
         return if cat.id.to_s == params[:id]
       end
     end
-    
     redirect_to cats_url 
   end
+  
+  def user_verify?
+    # byebug
+    if current_user
+      current_user.cats.each do |cat|
+        #byebug
+        return true if cat.id.to_s == params[:id]
+      end
+    end
+    false
+  end
+  
+  
 
   def edit
     @cat = Cat.find(params[:id])

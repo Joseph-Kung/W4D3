@@ -1,4 +1,6 @@
 class CatRentalRequestsController < ApplicationController
+  before_action :user_verify, only: [:approve, :deny]
+    
   def approve
     current_cat_rental_request.approve!
     redirect_to cat_url(current_cat)
@@ -21,6 +23,18 @@ class CatRentalRequestsController < ApplicationController
 
   def new
     @rental_request = CatRentalRequest.new
+  end
+  
+  def user_verify
+    # byebug
+    
+    if current_user
+      current_user.cats.each do |cat|
+        return if cat.id.to_s == params[:id]
+      end
+    end
+    
+    redirect_to cats_url 
   end
 
   private
