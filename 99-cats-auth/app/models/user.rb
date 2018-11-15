@@ -17,6 +17,11 @@ class User < ApplicationRecord
   
   attr_reader :password
   
+  has_many :cats,
+    foreign_key: :user_id,
+    class_name: :Cat
+  
+  
   def reset_session_token!
     self.session_token = SecureRandom.urlsafe_base64
     self.save!
