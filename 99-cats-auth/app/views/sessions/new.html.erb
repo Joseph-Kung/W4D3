@@ -1,4 +1,5 @@
 <form action="<%= session_url %>" name='' method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <label for="user_name">Username: </label>
   <input type="text" name="user[user_name]" value="">
   <br>
@@ -7,6 +8,6 @@
   <input type="password" name="user[password]" value="">
   <br>
   
-  <input type="submit" name="" value="Make a new user">
+  <input type="submit" name="" value="Sign in">
   
 </form>

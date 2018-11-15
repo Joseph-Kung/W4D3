@@ -12,12 +12,14 @@
       <% if current_user %>
       <h1> Welcome <%= current_user %>! </h1>
       <form class="" action="<%= session_url %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
         <input type="hidden" name="_method" value="delete">
         <input type="submit" name="" value="Log out">
       </form>
       <% else %>
       <h1> Welcome to 99 Cats! </h1>
       <form class="" action="<%= new_session_url %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
         <input type="hidden" name="_method" value="get">
       <input type="submit" name="" value="Sign in">
       </form>
